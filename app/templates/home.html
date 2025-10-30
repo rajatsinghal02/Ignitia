@@ -1,0 +1,108 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block page_title %}
+    Welcome, {{ current_user.first_name or current_user.username }}!
+    <h5 class="page-subtitle">
+        <i>You have {{ total_investigations_count }} active 
+        {% if total_investigations_count == 1 %}
+            investigation.
+        {% else %}
+            investigations.
+        {% endif %}
+        </i>
+    </h5>
+{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+
+<div class="dashboard-grid">
+    <div class="dashboard-main-column">
+        <div class="dashboard-card">
+            <div class="dashboard-card-header">
+                <h2 class="section-title">Active Investigations</h2>
+                <a href="{{ url_for('main.investigations') }}" class="view-all-link">
+                    View All <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+            <div class="dashboard-card-content">
+                <div class="investigation-grid">
+                    {% for inv in investigations %}
+                    <div class="inv-card"
+                         data-id="{{ inv.id }}" 
+                         data-title="{{ inv.title }}"
+                         data-status="{{ inv.status }}"
+                         data-timestamp="{{ inv.timestamp.strftime('%Y-%m-%d') }}">
+                        <div class="inv-card-top-header">
+                            <h3 title="{{ inv.title }}">{{ inv.title }}</h3>
+                            <span class="status-tag status-{{ inv.status.lower().replace(' ', '-') }}">{{ inv.status }}</span>
+                        </div>
+                        <img src="{{ url_for('static', filename='profile_pics/' + inv.drone_photo) if inv.drone_photo != 'default-drone.png' else url_for('static', filename='images/default-drone.png') }}" alt="Drone Photo" class="inv-card-image">
+                        <div class="inv-card-content">
+                             <div class="inv-card-details">
+                                <p><i class="fas fa-map-marker-alt"></i> {{ inv.location }}</p>
+                                <p><i class="fas fa-calendar-alt"></i> {{ inv.timestamp.strftime('%b %d, %Y') }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="dashboard-side-column">
+        <div class="dashboard-card dashboard-card--analytics">
+            <div class="dashboard-card-header">
+                <h2 class="section-title">Analytics</h2>
+                <div class="header-actions">
+                    <button class="icon-button-dash"><i class="fas fa-filter"></i></button>
+                    <button class="icon-button-dash"><i class="fas fa-sync-alt"></i></button>
+                </div>
+            </div>
+            <div class="dashboard-card-content">
+                <div class="feed-list">
+                    {% for item in feed_items %}
+                    <div class="feed-item">
+                        <div class="feed-icon">
+                            <i class="fas {{ item.icon }}"></i>
+                        </div>
+                        <div class="feed-info">
+                            <h4>{{ item.title }}</h4>
+                            <p>{{ item.timestamp.strftime('%I:%M %p') }}</p>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <div class="dashboard-card dashboard-card--reports">
+            <div class="dashboard-card-header">
+                <h2 class="section-title">Recent Reports</h2>
+                <a href="{{ url_for('main.reports') }}" class="view-all-link">
+                    View All <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+            <div class="dashboard-card-content">
+                <div class="report-list">
+                    {% for report in reports %}
+                    <div class="report-item">
+                        <div class="file-icon icon-{{ report.file_type }}">
+                            {% if report.file_type == 'pdf' %} <i class="fas fa-file-pdf"></i> {% elif report.file_type == 'doc' %} <i class="fas fa-file-word"></i> {% elif report.file_type == 'csv' %} <i class="fas fa-file-csv"></i> {% else %} <i class="fas fa-file"></i> {% endif %}
+                        </div>
+                        <div class="report-info">
+                            <h4>{{ report.title }}</h4>
+                            <p>Generated on {{ report.timestamp.strftime('%b %d, %Y') }}</p>
+                        </div>
+                        <button class="options-btn"><i class="fas fa-ellipsis-h"></i></button>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

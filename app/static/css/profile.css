@@ -1,0 +1,157 @@
+/* static/css/profile.css */
+
+.profile-page-container {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.profile-card {
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.05);
+}
+
+.profile-card-header {
+    padding: 30px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.profile-card-header h1 {
+    font-size: 1.5rem;
+    color: var(--text-primary);
+    margin: 0;
+}
+.profile-card-header p {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-top: 5px;
+}
+.profile-card-header p strong {
+    font-weight: 600;
+    color: var(--accent-primary);
+}
+
+.profile-form {
+    padding: 30px;
+}
+
+.profile-picture-section {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    margin-bottom: 30px;
+}
+
+.profile-picture-display {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--border-color);
+}
+
+.form-label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+.form-control-file {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+.form-control-file::file-selector-button {
+    background-color: var(--bg-primary);
+    color: var(--text-secondary);
+    border: 1px solid var(--border-color);
+    padding: 8px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+.form-control-file::file-selector-button:hover {
+    background-color: var(--border-color);
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 24px;
+}
+
+.form-group {
+    margin-bottom: 24px;
+}
+.form-control, .form-select {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 0.95rem;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+}
+.form-control:focus, .form-select:focus {
+    outline: none;
+    border-color: var(--accent-primary);
+    box-shadow: 0 0 0 2px rgba(139, 116, 204, 0.2);
+}
+
+.profile-divider {
+    border: none;
+    height: 1px;
+    background-color: var(--border-color);
+    margin: 30px 0;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+/* Make profile buttons smaller and themed */
+.btn {
+    width: auto;
+    padding: 10px 25px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+.btn-primary {
+    background-color: var(--accent-primary);
+    color: #fff;
+}
+.btn-primary:hover {
+    background-color: var(--text-primary);
+}
+.btn-secondary {
+    background-color: var(--border-color);
+    color: var(--text-secondary);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+}
+.btn-secondary:hover {
+    background-color: #d1d1d1;
+}
+
+.delete-account-section {
+    padding: 30px;
+    border-top: 1px solid var(--border-color);
+}
+.delete-account-section h3 {
+    margin: 0 0 5px 0;
+    color: var(--accent-red);
+}
+.delete-account-section p {
+    margin: 0 0 15px 0;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}

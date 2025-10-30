@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Dashboard{% endblock %} - IgnitiaTech</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/modal.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/investigations.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/flash.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/live_investigation.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/reports.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/analysis_modals.css') }}"> 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // This runs instantly, before anything is painted
+        const savedState = localStorage.getItem('sidebarState');
+        if (savedState === 'collapsed') {
+            document.documentElement.dataset.sidebarState = 'collapsed';
+        } else {
+            document.documentElement.dataset.sidebarState = 'open';
+        }
+    </script>
+</head>
+<body>
+    <!-- Add this once in base.html (inside <body>, near top or before </body>) -->
+    <div class="flash-messages" aria-live="polite" aria-atomic="true"></div>
+    <div class="sidebar-overlay"></div>
+
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <div class="sidebar-logo">
+                <img id="sidebar-toggle-btn" src="{{ url_for('static', filename='images/logo.png') }}" alt="IgnitiaTech Logo">
+                <span>IgnitiaTech</span>
+            </div>
+        </div>
+        
+        <nav class="sidebar-nav">
+            <a href="{{ url_for('main.home') }}" class="{{ 'active' if active_page == 'home' else '' }}"><i class="fas fa-home"></i> <span>Dashboard</span></a>
+            <a href="{{ url_for('main.reports') }}" class="{{ 'active' if active_page == 'reports' else '' }}"><i class="fas fa-file-alt"></i> <span>Reports</span></a>
+            <a href="{{ url_for('main.investigations') }}" class="{{ 'active' if active_page == 'investigations' else '' }}"><i class="fas fa-search-location"></i> <span>Investigations</span></a>
+            <a href="{{ url_for('main.settings') }}" class="{{ 'active' if active_page == 'settings' else '' }}"><i class="fas fa-cog"></i> <span>Settings</span></a>
+            <a href="{{ url_for('main.logout') }}"><i class="fas fa-sign-out-alt"></i> <span>Logout</span></a>
+        </nav>
+    </aside>
+
+    <div class="content-wrapper">
+        <main class="content-area">
+            <div class="top-content-bar">
+                <button id="mobile-sidebar-toggle" class="mobile-nav-toggle">
+                    <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Menu">
+                </button>
+                <div class="page-title">
+                    <h1>{% block page_title %}{% endblock %}</h1>
+                </div>
+
+                <div class="top-bar-right">
+                    <a href="#" id="open-modal-btn" class="btn btn-primary btn-new-investigation">
+                        <i class="fas fa-plus"></i>
+                        <span>New Investigation</span>
+                    </a>
+                    <div class="search-container">
+                        <form action="#" method="GET">
+                            <i class="fas fa-search search-icon"></i>
+                            <input type="search" class="search-input" placeholder="Search anything...">
+                        </form>
+                    </div>
+                    
+                    <a href="#" class="icon-button"><i class="fas fa-bell"></i></a>
+                    <a href="{{ url_for('main.profile') }}" class="profile-link">
+                        {% if current_user.profile_pic_url == 'default-profile-pic.png' %}
+                            <img src="{{ url_for('static', filename='images/' + current_user.profile_pic_url) }}" alt="Profile" class="profile-pic">
+                        {% else %}
+                            <img src="{{ url_for('static', filename='profile_pics/' + current_user.profile_pic_url) }}" alt="Profile" class="profile-pic">
+                        {% endif %}
+                    </a>
+                </div>
+            </div>
+
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="flash-messages">
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">
+                        <div class="alert-content">
+                            <div class="alert-icon">
+                                {% if category == 'success' %}
+                                    <i class="fas fa-check-circle"></i>
+                                {% elif category == 'danger' %}
+                                    <i class="fas fa-exclamation-triangle"></i>
+                                {% else %}
+                                    <i class="fas fa-info-circle"></i>
+                                {% endif %}
+                            </div>
+                            <div class="alert-message">{{ message }}</div>
+                        </div>
+                        <div class="alert-progress"></div>
+                    </div>
+                {% endfor %}
+                </div>
+            {% endif %}
+            {% endwith %}
+
+            <div class="page-content">
+                {% block content %}{% endblock %}
+            </div>
+        </main>
+    </div>
+
+    {% include '_new_investigation_modal.html' %}
+
+    {% include '_edit_investigation_modal.html' %}
+    {% include '_confirmation_modal.html' %}
+    {% include '_captures_modal.html' %}
+    {% include '_group_analysis_modal.html' %}
+    {% include '_person_details_modal.html' %}
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    {% block scripts %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,362 @@
+/* static/css/reports.css */
+
+.reports-header-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    margin-bottom: 30px;
+}
+
+.stat-card {
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    box-shadow: 0 4px 15px rgba(41, 28, 78, 0.05);
+    transition: all 0.3s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(41, 28, 78, 0.1);
+}
+
+.stat-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.stat-card-header h3 {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+}
+
+.stat-card-header .icon {
+    font-size: 1.1rem;
+}
+
+.stat-card-body .value {
+    font-size: 2.25rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    line-height: 1;
+}
+
+.stat-card.total .icon { color: #3b82f6; }
+.stat-card.live .icon { color: #10b981; }
+.stat-card.ongoing .icon { color: #f59e0b; }
+.stat-card.completed .icon { color: #8b74cc; }
+
+/* ===== UPDATED from reports-charts-grid to reports-content-grid ===== */
+.reports-content-grid {
+    display: grid;
+    grid-template-columns: 3fr 2fr; 
+    gap: 24px;
+    margin-bottom: 24px;
+}
+
+.chart-card {
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 20px 25px;
+    box-shadow: 0 4px 15px rgba(41, 28, 78, 0.05);
+}
+
+.chart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.chart-header h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.filter-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    color: var(--text-secondary);
+    padding: 8px 15px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.filter-btn:hover {
+    background-color: var(--border-color);
+    color: var(--text-primary);
+}
+
+.chart-content {
+    height: 350px; 
+}
+
+/* ===== NEW STYLES FOR THE GUIDE CARD ===== */
+.guide-card {
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 20px 25px;
+    box-shadow: 0 4px 15px rgba(41, 28, 78, 0.05);
+    display: flex;
+    flex-direction: column;
+}
+
+.guide-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    color: var(--text-primary);
+}
+
+.guide-header h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.guide-header .fas {
+    font-size: 1.2rem;
+    color: #d9534f;
+}
+
+.guide-content {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    overflow-y: auto;
+}
+
+.guide-content p {
+    margin-bottom: 15px;
+}
+
+.guide-content h4 {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-top: 20px;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.guide-content h4 .fas {
+    color: var(--accent-primary);
+}
+
+.guide-content ul {
+    list-style: none;
+    padding-left: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.guide-content li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+.level-indicators {
+    flex-shrink: 0;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-top: 6px;
+}
+
+.level-indicators.low { background-color: #10b981; }
+.level-indicators.moderate { background-color: #f59e0b; }
+.level-indicators.high { background-color: #ef4444; }
+.level-indicators.critical { background-color: #8b5cf6; }
+
+/* ============================================= */
+/* NEW INVESTIGATION CARD STYLES                 */
+/* ============================================= */
+.report-inv-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    padding-top: 10px;
+}
+
+.report-inv-card {
+    background-color: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(41, 28, 78, 0.05);
+}
+
+.report-inv-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 20px rgba(41, 28, 78, 0.1);
+}
+
+.report-inv-card img {
+    width: 100%;
+    height: 140px;
+    object-fit: cover;
+}
+
+.report-inv-card-content {
+    padding: 15px;
+}
+
+.report-inv-card-content h4 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 15px;
+}
+
+.report-inv-card .card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+}
+
+.report-inv-card .card-footer .fa-star {
+    color: #f59e0b;
+}
+
+/* ============================================= */
+/* NEW CAPTURES MODAL STYLES                     */
+/* ============================================= */
+.captures-modal-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 15px;
+    max-height: 90vh;
+    padding-right: 10px; /* space for scrollbar */
+}
+
+/* Add to the end of static/css/reports.css */
+
+.captures-modal-grid img {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+}
+
+/* --- Slider Styles --- */
+.investigation-slider-container {
+    position: relative;
+    padding: 10px 40px; /* Space for the navigation arrows */
+    margin: 0 -15px; /* Offset padding to align with card edges */
+}
+
+#investigation-swiper {
+    padding: 10px 0;
+}
+
+.swiper-slide {
+    height: auto; /* Allow slides to determine their own height */
+    display: flex; /* Fix for potential layout issues */
+    flex-direction: column;
+}
+
+.report-inv-card {
+    height: 100%; /* Ensure cards fill the slide space */
+}
+
+/* Style the navigation arrows */
+.swiper-button-next,
+.swiper-button-prev {
+    color: var(--accent-primary);
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    transition: all 0.2s ease;
+}
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+    background-color: white;
+    color: var(--text-primary);
+}
+.swiper-button-next:after,
+.swiper-button-prev:after {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+/* --- Filter Control Styles --- */
+.filter-controls {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+#date-range-picker {
+    background: var(--bg-primary) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2353399c'%3E%3Cpath d='M17 12h-5v5h5v-5zM16 1v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-1V1h-2zm3 18H5V8h14v11z'/%3E%3C/svg%3E") no-repeat 10px center;
+    background-size: 20px;
+    border: 1px solid var(--border-color);
+    color: var(--text-secondary);
+    padding: 8px 15px 8px 38px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    width: 200px; /* Adjust as needed */
+}
+#date-range-picker:hover {
+    border-color: var(--accent-primary);
+}
+
+.clear-btn {
+    background: none;
+    border: none;
+    color: var(--accent-red);
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.8rem;
+}
+
+/* --- Enlarge Captures Modal --- */
+#captures-modal-overlay .modal-container {
+    width: 90vw; /* 90% of viewport width */
+    height: 90vh; /* 90% of viewport height */
+    display: flex;
+    flex-direction: column;
+}
+
+#captures-modal-overlay .modal-form {
+    flex-grow: 1; /* Allow the form area to fill space */
+    overflow: hidden; /* Prevent double scrollbars */
+}
+
+#captures-modal-overlay .captures-modal-grid {
+    height: 100%; /* Make grid fill the modal-form area */
+    max-height: none; /* Override previous max-height */
+    overflow-y: auto; /* Make the grid scrollable */
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+}

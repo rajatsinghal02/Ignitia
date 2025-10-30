@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% block title %}Investigations{% endblock %}
+{% block page_title %}Case Files{% endblock %}
+
+{% block content %}
+    
+    {% if grouped_investigations %}
+        {% for date, investigations_on_date in grouped_investigations.items() %}
+            <h2 class="date-group-header" id="{{ date.strftime('%Y-%m-%d') }}">
+                {{ date.strftime('%B %d, %Y') }}
+            </h2>
+            <div class="investigations-grid">
+                {% for inv in investigations_on_date %}
+                    <div class="inv-card" 
+                        data-id="{{ inv.id }}" 
+                        data-title="{{ inv.title }}" 
+                        data-location="{{ inv.location }}" 
+                        data-description="{{ inv.description }}">
+
+                        <div class="inv-card-top-header">
+                            <h3 title="{{ inv.title }}">{{ inv.title }}</h3>
+                            <span class="status-tag status-{{ inv.status.lower() }}">{{ inv.status }}</span>
+                        </div>
+
+                        <img src="{{ url_for('static', filename='profile_pics/' + inv.drone_photo) if inv.drone_photo != 'default-drone.png' else url_for('static', filename='images/default-drone.png') }}" alt="Drone Photo" class="inv-card-image">
+
+                        <div class="inv-card-content">
+                            <div class="inv-card-details">
+                                <p><i class="fas fa-map-marker-alt"></i> {{ inv.location }}</p>
+                                <p><i class="fas fa-robot"></i> Drone: {{ inv.drone_type }}</p>
+                            </div>
+                        </div>
+
+                        <div class="inv-card-footer">
+                            {% if inv.status == 'Live' %}
+                                <button class="inv-action-btn edit" data-action="edit"><i class="fas fa-pencil-alt"></i><span class="btn-text">Edit</span></button>
+                                <button class="inv-action-btn start" data-action="start"><i class="fas fa-play"></i><span class="btn-text">Start</span></button>
+                                <button class="inv-action-btn delete" data-action="delete"><i class="fas fa-trash-alt"></i><span class="btn-text">Delete</span></button>
+                            
+                            {% elif inv.status == 'Pending' %}
+                                <button class="inv-action-btn edit" data-action="edit"><i class="fas fa-pencil-alt"></i><span class="btn-text">Edit</span></button>
+                                <button class="inv-action-btn continue" data-action="continue"><i class="fas fa-play-circle"></i><span class="btn-text">Continue</span></button>
+                                <button class="inv-action-btn delete" data-action="delete"><i class="fas fa-trash-alt"></i><span class="btn-text">Delete</span></button>
+                           
+                            {% elif inv.status == 'Completed' %}
+                                <button class="inv-action-btn edit" data-action="edit"><i class="fas fa-pencil-alt"></i><span class="btn-text">Edit</span></button>
+                                <button class="inv-action-btn delete" data-action="delete"><i class="fas fa-trash-alt"></i><span class="btn-text">Delete</span></button>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endfor %}
+    {% else %}
+        <div class="no-investigations-placeholder">
+            <i class="fas fa-folder-open"></i>
+            <h2>No Investigations Found</h2>
+            <p>You haven't created any investigation files yet. Click the button in the top right to get started.</p>
+        </div>
+    {% endif %}
+{% endblock %}

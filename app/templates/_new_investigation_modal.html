@@ -1,0 +1,58 @@
+<div class="modal-overlay" id="new-investigation-modal-overlay">
+    <div class="modal-container">
+        <div class="modal-header">
+            <div>
+                <h2>Establish New Investigation</h2>
+                <p>Enter the preliminary details to begin a new investigation file.</p>
+            </div>
+            <button class="modal-close-btn" id="modal-close-btn"><i class="fas fa-times"></i></button>
+        </div>
+
+        <form method="POST" action="{{ url_for('main.new_investigation') }}" enctype="multipart/form-data" class="modal-form">
+            {{ new_investigation_form.hidden_tag() }}
+
+            <div class="form-grid">
+                <div class="form-group">
+                    {{ new_investigation_form.title.label(class="form-label") }}
+                    {{ new_investigation_form.title(class="form-control", placeholder="e.g., North Field Anomaly") }}
+                </div>
+                <div class="form-group">
+                    {{ new_investigation_form.location.label(class="form-label") }}
+                    {{ new_investigation_form.location(class="form-control", placeholder="e.g., Reno, Nevada") }}
+                </div>
+            </div>
+
+            <div class="form-group">
+                {{ new_investigation_form.drone_type.label(class="form-label") }}
+                {{ new_investigation_form.drone_type(class="form-select") }}
+            </div>
+
+            <div class="form-group form-group-file">
+                {{ new_investigation_form.drone_photo.label(class="form-label") }}
+                <label for="drone_photo" class="custom-file-upload">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                    <span>Choose a file...</span>
+                </label>
+                {{ new_investigation_form.drone_photo(class="form-control-file", id="drone_photo") }}
+                <span id="file-chosen">No file chosen</span>
+            </div>
+            
+            <div class="form-group">
+                {{ new_investigation_form.description.label(class="form-label") }}
+                {{ new_investigation_form.description(class="form-control", rows="4", placeholder="Initial objectives, key details...") }}
+            </div>
+
+            <div class="form-actions">
+                {{ new_investigation_form.submit(class="btn btn-primary", value="Establish Investigation") }}
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    const actualBtn = document.getElementById('drone_photo');
+    const fileChosen = document.getElementById('file-chosen');
+    actualBtn.addEventListener('change', function(){
+      fileChosen.textContent = this.files[0].name
+    });
+</script>

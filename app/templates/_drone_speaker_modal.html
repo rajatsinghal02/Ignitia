@@ -1,0 +1,31 @@
+<div class="modal-overlay" id="drone-speaker-modal-overlay">
+    <div class="modal-container" style="max-width: 500px;">
+        <div class="modal-header">
+            <h2><i class="fas fa-broadcast-tower"></i> Drone Speaker Control</h2>
+            <button class="modal-close-btn" id="drone-speaker-modal-close-btn"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="modal-form">
+            <p class="modal-subtitle">Upload an audio file to play it from the drone's speaker system.</p>
+            
+            <form id="drone-upload-form">
+                <div class="form-group">
+                    <label for="drone-music-file">Audio File (MP3, WAV)</label>
+                    <input type="file" name="file" id="drone-music-file" accept="audio/*" required>
+                </div>
+                <div class="form-group">
+                    <label for="drone-volume">Volume (0-100%)</label>
+                    <input type="number" id="drone-volume" name="volume" min="0" max="100" value="70" required>
+                </div>
+                <button type="submit" class="drone-modal-btn upload">
+                    <i class="fas fa-upload"></i> Upload & Play
+                </button>
+            </form>
+
+            <button class="drone-modal-btn stop" id="drone-stop-btn">
+                <i class="fas fa-stop-circle"></i> Stop Music
+            </button>
+
+            <div class="drone-status" id="drone-status">Status: Idle</div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,20 @@
+<div class="modal-overlay" id="confirmation-modal-overlay">
+    <div class="modal-container" style="max-width: 500px; max-height: auto;">
+        <div class="modal-header">
+            <div>
+                <h2 id="confirmation-title">Confirm Action</h2>
+            </div>
+            <button class="modal-close-btn" id="confirmation-modal-close-btn"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="modal-form" style="text-align: center;">
+            <p id="confirmation-message" style="font-size: 1.1rem; color: var(--text-secondary); margin-bottom: 30px;">Are you sure?</p>
+            <form method="POST" action="" id="confirmation-form">
+                <input type="hidden" name="new_status" id="new-status-input">
+                <div class="form-actions" style="display: flex; gap: 15px; border-top: none; padding-top: 0;">
+                    <button type="button" class="btn btn-secondary" id="confirmation-cancel-btn">Cancel</button>
+                    <button type="submit" class="btn btn-primary" id="confirmation-confirm-btn">Confirm</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

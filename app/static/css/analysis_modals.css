@@ -1,0 +1,175 @@
+/* static/css/analysis_modals.css */
+
+/* --- Group Analysis Modal (Unchanged) --- */
+.group-stats-header {
+    display: flex;
+    gap: 24px;
+    align-items: center;
+    margin-top: 8px;
+    padding: 10px 16px;
+    background-color: #f4f2f9;
+    border-radius: 8px;
+    border: 1px solid #e0daee;
+}
+.group-stats-header span {
+    font-size: 0.9rem;
+    color: #53399c;
+}
+.group-stats-header i {
+    margin-right: 8px;
+    color: #8b74cc;
+}
+.group-stats-header .panic-stat strong {
+    color: #d9534f;
+    font-size: 1.1rem;
+}
+.group-faces-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 16px;
+    max-height: 65vh;
+    overflow-y: auto;
+    padding: 10px;
+}
+.face-card {
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid #e0daee;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    text-align: center;
+}
+.face-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(139, 116, 204, 0.2);
+}
+.face-card img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    display: block;
+}
+.face-card-info {
+    padding: 12px;
+    font-size: 0.85rem;
+    color: #3e2a75;
+}
+.face-card-info strong {
+    color: #8b74cc;
+}
+
+/* ======================================================
+--- Person Details Modal (REVISED SECTION) --- 
+======================================================
+*/
+
+.person-details-body {
+    display: flex;
+    gap: 32px; /* Increased gap for better separation */
+    /* Set a max-height to constrain the modal vertically */
+    max-height: 75vh; 
+    padding-top: 10px;
+    flex-direction: row;
+}
+
+.person-image-container {
+    flex: 0 0 40%; /* Left column takes 40% of the width */
+    display: flex;
+    align-items: center; /* Vertically centers the content */
+    justify-content: center; /* Horizontally centers the content */
+}
+
+.person-image-container img {
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+    max-height: 100%; /* Image will scale to fit without overflowing */
+    object-fit: contain; /* Shows the full image without cropping */
+    border-radius: 16px;
+    border: 2px solid #b7a9df;
+    /* Added a professional shadow effect */
+    box-shadow: 0 10px 30px rgba(83, 57, 156, 0.2);
+    transition: transform 0.3s ease;
+}
+
+.person-image-container img:hover {
+    transform: scale(1.03); /* Slight zoom on image hover */
+}
+
+
+.person-stats-container {
+    flex: 1; /* Right column takes the remaining space */
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    /* This makes the container scrollable if content overflows */
+    /* overflow-y: auto;  */
+    /* Padding to prevent scrollbar from overlapping content */
+    padding-right: 15px; 
+    padding-left: 5px;
+}
+
+.person-stats-container h3 {
+    margin-top: 0;
+    color: #53399c;
+}
+
+.stat-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f9f7fc;
+    padding: 14px 18px; /* Slightly increased padding */
+    border-radius: 10px;
+    font-size: 0.95rem;
+    border: 1px solid transparent;
+    /* Added transition for smooth hover effect */
+    transition: all 0.2s ease-in-out;
+}
+
+/* --- Added Hover Effect --- */
+.stat-item:hover {
+    transform: scale(1.03);
+    background-color: #f4f2f9;
+    border-color: #d8cff0;
+    box-shadow: 0 4px 15px rgba(139, 116, 204, 0.1);
+}
+
+.stat-item span {
+    color: #555;
+    display: inline-flex;
+    align-items: center;
+}
+.stat-item span i {
+    color: #8b74cc;
+    margin-right: 12px; /* Increased margin for icon */
+    width: 20px;
+    text-align: center;
+}
+.stat-item strong {
+    color: #3e2a75;
+    font-size: 1.05rem;
+}
+.panic-stat-large strong {
+    font-size: 1.5rem;
+    color: #c9302c;
+    font-weight: 700;
+}
+
+
+/* --- Custom Scrollbar Styling (for a modern look) --- */
+.person-stats-container::-webkit-scrollbar {
+    width: 8px;
+}
+.person-stats-container::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+.person-stats-container::-webkit-scrollbar-thumb {
+    background: #c7bce1; /* Lighter purple */
+    border-radius: 10px;
+}
+.person-stats-container::-webkit-scrollbar-thumb:hover {
+    background: #8b74cc; /* Darker purple on hover */
+}

@@ -1,0 +1,268 @@
+/* --- Base Modal Styles (Unchanged) --- */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(29, 22, 54, 0.6); /* Darker purple backdrop */
+    backdrop-filter: blur(5px); /* Frosted glass effect */
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* --- THEME UPDATE: Main Modal Container --- */
+.modal-container {
+    background-color: var(--bg-primary); /* Use light purple bg */
+    width: 90%;
+    max-width: 700px; /* Slightly smaller for a tighter look */
+    max-height: 90vh;
+    border-radius: 16px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transform: scale(0.95) translateY(10px);
+    transition: transform 0.3s ease;
+    border-top: 5px solid var(--accent-primary); /* Accent border on top */
+}
+
+.modal-overlay.active .modal-container {
+    transform: scale(1) translateY(0);
+}
+
+/* --- THEME UPDATE: Modal Header --- */
+.modal-header {
+    padding: 20px 24px;
+    /* Use the same gradient as the dashboard cards! */
+    background: linear-gradient(90deg, var(--bg-secondary) 0%, #f4f3f8 100%);
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* Center vertically */
+    flex-shrink: 0;
+}
+
+.modal-header h2 {
+    color: var(--text-primary);
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+.modal-header p {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-top: 2px;
+}
+
+.modal-close-btn {
+    background: transparent;
+    border: 1px solid transparent;
+    color: var(--text-secondary);
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.modal-close-btn:hover {
+    background: var(--accent-primary);
+    color: #fff;
+    border-color: var(--accent-primary);
+    transform: rotate(90deg);
+}
+
+/* --- THEME UPDATE: Modal Form Body --- */
+.modal-form {
+    padding: 24px;
+    overflow-y: auto;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 18px; /* Space between form groups */
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+}
+
+/* --- THEME UPDATE: Form Elements --- */
+.modal-form .form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-form .form-label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    margin-bottom: 8px;
+}
+
+.modal-form .form-control,
+.modal-form .form-select {
+    width: 100%;
+    height: 44px;
+    padding: 0 15px;
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 0.95rem;
+    color: var(--text-primary);
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.modal-form .form-control:focus,
+.modal-form .form-select:focus {
+    outline: none;
+    border-color: var(--accent-primary);
+    box-shadow: 0 0 0 3px hsla(256, 47%, 75%, 0.5); /* Purple focus ring */
+}
+
+.modal-form textarea.form-control {
+    height: auto;
+    padding-top: 10px;
+    resize: vertical;
+}
+
+/* --- THEME UPDATE: Custom File Input --- */
+.modal-form .form-control-file {
+    display: none; /* Hide the ugly default input */
+}
+
+.custom-file-upload {
+    display: flex;
+    align-items: stretch;
+    align-content: space-around;
+    justify-content: center;
+    padding: 0 15px;
+    height: 44px;
+    border: 1px dashed var(--accent-secondary);
+    border-radius: 8px;
+    background-color: var(--bg-secondary);
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.custom-file-upload i {
+    margin-right: 8px;
+}
+
+.custom-file-upload:hover {
+    border-color: var(--accent-primary);
+    background-color: #fdfdff;
+    color: var(--accent-primary);
+}
+
+#file-chosen {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-top: 8px;
+    font-style: italic;
+}
+
+/* --- THEME UPDATE: Submit Button --- */
+.form-actions {
+    margin-top: 10px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border-color);
+}
+
+.modal-form .btn-primary {
+    width: 100%;
+    height: 48px;
+    border: none;
+    border-radius: 8px;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    /* Awesome purple gradient for the button */
+    background: linear-gradient(90deg, var(--accent-primary), var(--text-secondary));
+    box-shadow: 0 4px 15px hsla(256, 47%, 62%, 0.3);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.modal-form .btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px hsla(256, 47%, 62%, 0.4);
+}
+
+.form-group-file {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+}
+
+
+* --- NEW: Confirmation Modal Button Styles --- */
+
+/* This will hold the buttons and space them out */
+.modal-buttons {
+    display: flex;
+    justify-content: flex-end; /* Aligns buttons to the right */
+    gap: 15px;
+    margin-top: 25px;
+}
+
+/* Base style for ALL buttons in the modal */
+.modal-btn {
+    padding: 10px 25px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    border-radius: 8px;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+/* Style for the secondary/cancel button */
+.modal-btn.secondary {
+    background-color: var(--bg-primary);
+    border-color: var(--border-color);
+    color: var(--text-secondary);
+}
+.modal-btn.secondary:hover {
+    background-color: var(--border-color);
+    color: var(--text-primary);
+}
+
+/* Style for the main purple action button (Start, Continue, etc.) */
+.modal-btn.primary {
+    background-color: var(--accent-primary);
+    color: #ffffff;
+    box-shadow: 0 4px 15px rgba(139, 116, 204, 0.2);
+}
+.modal-btn.primary:hover {
+    background-color: var(--text-secondary);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(139, 116, 204, 0.3);
+}
+
+/* Style for the danger/delete button */
+.modal-btn.danger {
+    background-color: var(--accent-red);
+    color: #ffffff;
+    box-shadow: 0 4px 15px rgba(229, 57, 53, 0.2);
+}
+.modal-btn.danger:hover {
+    background-color: var(--accent-red-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(229, 57, 53, 0.3);
+}

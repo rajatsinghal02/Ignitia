@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live - {{ investigation.title }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/modal.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/live_investigation.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+    <div class="live-modal-container" data-investigation-id="{{ investigation.id }}" data-investigation-title="{{ investigation.title }}">
+        <div class="live-modal-content">
+            <div class="live-top-nav">
+                <div class="nav-left">
+                    <div class="nav-logo">
+                        <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo">
+                        <span>IgnitiaTech</span>
+                    </div>
+                    <nav class="nav-menu">
+                        <a href="#" class="active">Controller</a>
+                        <a href="#">Overview</a>
+                        <a href="#">Routes</a>
+                        <a href="#">All Drones</a>
+                        <a href="#">Map view</a>
+                    </nav>
+                </div>
+                <div class="nav-right">
+                    <div class="nav-stat"><i class="fas fa-expand-arrows-alt"></i> 243.4 km²</div>
+                    <div class="nav-stat"><i class="fas fa-cloud-sun-rain"></i> Rain, 36°C</div>
+                    <div class="nav-stat"><span class="status-tag status-live">Live</span></div>
+                    <div class="nav-stat" id="live-time">12:00:00 PM</div>
+                    <a href="#" id="live-modal-close-btn" class="live-modal-close-link">
+                        <i class="fas fa-times"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="live-body-main-grid">
+
+                <div class="live-main-content">
+                    <div class="video-feed-wrapper">
+                        <video id="camera-feed" autoplay playsinline></video>
+                        
+                        <div class="video-glass-overlay">
+                            <div class="glass-section">
+                                <button class="glass-btn active">HDR</button>
+                                <span class="glass-text">4K - 19.67 FPS</span>
+                            </div>
+                            <div class="glass-section">
+                                <label>Level</label>
+                                <div class="level-indicator"></div>
+                            </div>
+                            <div class="glass-section">
+                                <button class="glass-btn-square">KT</button>
+                                <div class="color-buttons">
+                                    <button class="glass-btn-color">R</button>
+                                    <button class="glass-btn-color">G</button>
+                                    <button class="glass-btn-color">B</button>
+                                    <button class="glass-btn-color">Y</button>
+                                </div>
+                            </div>
+                            <div class="glass-section histogram">
+                                <div class="histogram-bar" style="height: 40%;"></div>
+                                <div class="histogram-bar" style="height: 60%;"></div>
+                                <div class="histogram-bar" style="height: 80%;"></div>
+                                <div class="histogram-bar" style="height: 50%;"></div>
+                                <div class="histogram-bar" style="height: 30%;"></div>
+                                <span class="glass-text">H2.85</span>
+                            </div>
+                            <div class="glass-section">
+                                <button id="open-drone-speaker-modal" class="glass-btn speaker-btn">
+                                    <i class="fas fa-volume-up"></i> Drone Audio
+                                </button>
+                            </div>
+
+                            <div class="glass-section">
+                                <button id="open-ai-assistant-modal" class="glass-btn ai-assistant-btn">
+                                    <i class="fas fa-brain"></i> AI Assistant
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="live-bottom-grid">
+                        <div class="ui-panel video-panel">
+                            <div class="panel-header">
+                                <div class="header-buttons">
+                                    <button class="ui-btn">Video</button>
+                                    <button class="ui-btn active">Photo</button>
+                                </div>
+                            </div>
+                            <div class="panel-content map-placeholder-sm">
+                                </div>
+                        </div>
+                        <div class="ui-panel real-time-view-panel">
+                            <div class="panel-header"><h3>Real time view</h3></div>
+                            <div class="panel-content data-grid">
+                                <div class="data-readout"><label>Speed</label><span>20 km/h</span></div>
+                                <div class="data-readout"><label>Lens</label><span>25 mm</span></div>
+                                <div class="data-readout"><label>Height</label><span>80 m</span></div>
+                                <div class="data-readout"><label>ISO</label><span>600</span></div>
+                                <div class="data-readout"><label>Flight time</label><span>5h 34m</span></div>
+                                <div class="data-readout"><label>Shutter</label><span>180.0</span></div>
+                            </div>
+                        </div>
+                        <div class="ui-panel display-resolution-panel">
+                            <div class="panel-header"><h3>Display resolution</h3></div>
+                            <div class="panel-content">
+                                <p class="placeholder-text">Resolution options here</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="live-ui-column live-ui-right-sidebar">
+                    <div class="ui-panel drone-info-panel">
+                         <div class="panel-header">
+                            <h3>{{ investigation.drone_type }}</h3>
+                            <img src="{{ url_for('static', filename='images/logo.png') }}" class="drone-icon">
+                        </div>
+                        <div class="panel-content">
+                             <p><strong>ID Number:</strong> {{ investigation.id }}</p>
+                             <p class="description">{{ investigation.description }}</p>
+                        </div>
+                    </div>
+
+                    <div class="ui-panel drone-stats-panel">
+                        <div class="panel-content">
+                            <div class="stat-item">
+                                <div class="stat-header"><span>Battery</span><span>50%</span></div>
+                                <div class="progress-bar"><div class="progress-fill" style="width: 50%;"></div></div>
+                            </div>
+                            <div class="stat-item">
+                                <label>Altitude Limited</label>
+                                <input type="range" min="10" max="300" value="150" class="styled-slider">
+                            </div>
+                             <div class="stat-item">
+                                <label>Resolution px</label>
+                                <input type="range" min="2" max="14" value="8" class="styled-slider">
+                            </div>
+                            <div class="camera-actions">
+                                <button class="ui-btn">ISO</button>
+                                <button class="ui-btn active">HDR</button>
+                                <button class="ui-btn">DVR</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="ui-panel capture-panel-new">
+                        <div class="panel-header"><h3>Recent Captures
+                            <span class="capture-count" id="capture-count-display">
+                                ({{ recent_captures|length }})
+                            </span>
+                        </h3></div>
+                        <div class="panel-content">
+                            <div class="captures-grid" id="captures-grid">
+                                {% for capture in recent_captures %}
+                                    <img src="{{ url_for('static', filename='captures/' + capture.image_filename) }}" 
+                                        class="capture-thumbnail">
+                                {% endfor %}
+                            </div>
+                            <p class="report-note">
+                                All captures can be found under <strong>{{ investigation.title }}</strong> in the reports section for detailed review.
+                            </p>
+                            <div class="capture-actions">
+                                <button class="capture-btn" id="capture-btn"><i class="fas fa-camera"></i> Capture</button>
+                                <div class="status-buttons-group">
+                                    <button class="status-action-btn pause" data-action="pause"><i class="fas fa-pause"></i> Pause</button>
+                                    <button class="status-action-btn complete" data-action="complete"><i class="fas fa-flag-checkered"></i> Complete</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% include '_confirmation_modal.html' %}
+    {% include '_drone_speaker_modal.html' %}
+    {% include '_ai_assistant_modal.html' %}
+    <canvas id="canvas" style="display:none;"></canvas>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/live_investigation.js') }}"></script>
+</body>
+</html>

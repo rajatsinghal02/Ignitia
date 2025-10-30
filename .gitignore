@@ -1,0 +1,100 @@
+# =========================
+# 🐍 Python / Flask Project
+# =========================
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Virtual environments
+venv/
+env/
+.venv/
+venv312/
+
+# macOS system files
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Environment & config files
+.env
+*.env
+*.ini
+*.cfg
+*.toml
+*.yaml
+*.yml
+
+# Flask instance folder
+instance/
+*.db
+*.sqlite3
+
+# Logs and temporary files
+*.log
+*.pot
+*.pyc
+*.pyo
+*.pyd
+*.swp
+*.bak
+*.tmp
+*.temp
+*.cache/
+*.pytest_cache/
+coverage/
+htmlcov/
+*.coverage
+
+# Jupyter Notebooks checkpoints
+.ipynb_checkpoints/
+
+# Model files
+*.onnx
+*.pt
+*.pth
+*.bin
+*.h5
+
+# Dataset files
+data/
+datasets/
+*.csv
+*.zip
+*.tar
+*.gz
+*.npz
+*.npy
+
+# IDE and editor configs
+.vscode/
+.idea/
+*.code-workspace
+
+# Build directories
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# Node (if you add frontend)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Cache / temporary images
+__MACOSX/
+*.mp4
+*.avi
+*.mov
+*.jpg
+*.jpeg
+*.png
+*.gif
+*.webp

@@ -1,0 +1,316 @@
+/* static/css/dashboard.css */
+
+.page-subtitle {
+    font-size: 0.9rem;
+    font-weight: 400;
+    color: var(--text-secondary);
+    margin-top: 5px;
+}
+
+.dashboard-grid {
+    display: grid;
+    /* UPDATED: Changed the ratio for a more balanced look */
+    grid-template-columns: 3fr 2fr;
+    gap: 24px;
+    align-items: start;
+}
+
+/* --- ADD THIS NEW RULE --- */
+.dashboard-side-column {
+    display: grid;
+    gap: 24px;
+    align-content: start;
+}
+/* --- END OF NEW RULE --- */
+
+/* --- NEW: Main Card Structure --- */
+.dashboard-card {
+    background-color: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    /* REMOVED: margin-bottom from here for better grid control */
+}
+
+.dashboard-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 15px;
+    height: 50px;
+    background: linear-gradient(90deg, var(--text-primary), var(--accent-primary));
+    border-bottom: 1px solid var(--border-color);
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+}
+
+.dashboard-card-content {
+    padding: 20px;
+}
+
+.section-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--bg-primary);
+    margin: 0;
+}
+
+
+/* ============================================= */
+/* START OF UPDATED SECTION            */
+/* ============================================= */
+
+/* Investigation Cards (Now inside the main card) */
+.investigation-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+
+/* --- ADD THIS NEW RULE for dashboard card interactivity --- */
+.dashboard-grid .inv-card {
+    cursor: pointer;
+}
+
+/* --- NEW: Dashboard-specific card resizing --- */
+.dashboard-grid .inv-card .inv-card-image {
+    /* Make the image shorter */
+    height: 120px;
+}
+
+.dashboard-grid .inv-card .inv-card-top-header {
+    /* Reduce header padding */
+    padding: 12px 15px;
+}
+
+.dashboard-grid .inv-card .inv-card-content {
+    /* Reduce content padding */
+    padding: 15px;
+}
+
+/* --- NEW: Title Truncation Logic --- */
+.dashboard-grid .inv-card h3 {
+    /* This ensures the title stays on one line */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    /* We add a max-width to help the ellipsis engage sooner if needed */
+    max-width: 150px; 
+}
+
+
+/* ============================================= */
+/* END OF UPDATED SECTION             */
+/* ============================================= */
+
+
+/* Recent Reports List (Now inside the main card) */
+.report-list .report-item {
+    display: flex;
+    align-items: center;
+    background-color: transparent; /* Remove background, it's now on the parent card */
+    border: none; /* Remove border */
+    border-bottom: 1px solid var(--border-color); /* Use bottom border as separator */
+    border-radius: 0;
+    padding: 15px 0;
+    margin-bottom: 0;
+}
+.report-list .report-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+.report-list .report-item:first-child {
+    padding-top: 0;
+}
+
+.file-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 15px;
+    color: #fff;
+    font-size: 1.2rem;
+}
+.icon-pdf { background-color: #ef4444; }
+.icon-doc { background-color: #3b82f6; }
+.icon-csv { background-color: #10b981; }
+
+.report-info { flex-grow: 1; }
+.report-info h4 { font-size: 0.95rem; font-weight: 500; color: var(--text-primary); margin-bottom: 3px; }
+.report-info p { font-size: 0.8rem; color: var(--text-secondary); }
+
+.options-btn {
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+/* --- Modern Icon Button Style --- */
+.icon-button-dash{
+    background-color: transparent;
+    border: 1px solid var(--border-color);
+    color: var(--bg-secondary);
+    width: 35px;
+    height: 35px;
+    border-radius: 50%; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.2s ease-in-out;
+}
+
+
+.icon-button-dash:hover{
+    background-color: var(--accent-primary);
+    color: #ffffff;
+    border-color: var(--accent-primary);
+    transform: translateY(-2px); /* Lifts the button slightly */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.icon-button-dash:active {
+    transform: translateY(0); /* Resets lift on click */
+    box-shadow: none;
+}
+
+
+.header-actions{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+/* Thread Feed (Now inside the main card) */
+.thread-feed-header .icon-button-dash { /* Re-using this class from reference */
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    cursor: pointer;
+    font-size: 1rem;
+    margin-left: 10px;
+}
+
+.feed-list .feed-item {
+    display: flex;
+    align-items: center;
+    padding: 15px 0;
+    border-bottom: 1px solid var(--border-color);
+}
+.feed-list .feed-item:last-child { border-bottom: none; padding-bottom: 0; }
+.feed-list .feed-item:first-child { padding-top: 0; }
+
+.feed-icon {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 15px;
+    background-color: var(--bg-primary);
+    color: var(--accent-primary);
+    border: 1px solid var(--border-color);
+}
+.feed-info { flex-grow: 1; }
+.feed-info h4 { font-size: 0.9rem; font-weight: 500; color: var(--text-primary); margin-bottom: 3px; }
+.feed-info p { font-size: 0.8rem; color: var(--text-secondary); }
+
+
+/* --- NEW: View All Link Style for Card Headers --- */
+.view-all-link {
+    text-decoration: none;
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--bg-secondary);
+    transition: color 0.2s ease;
+}
+
+.view-all-link:hover {
+    color: var(--bg-primary);
+}
+
+.view-all-link i {
+    margin-left: 10px;
+}
+
+/* static/css/dashboard.css */
+
+/*
+=================================================
+    DASHBOARD RESPONSIVE STYLES
+=================================================
+*/
+
+/* --- Default Desktop Layout (4 cards) ---
+/* Hide cards after the 4th one on large screens */
+/* .investigation-grid .inv-card:nth-child(n+5) {
+    display: none;
+} */ 
+
+/* For Tablets (and smaller screens) */
+@media (max-width: 1200px) {
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .dashboard-side-column {
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+    }
+
+    /* --- Tablet Layout: 3 cards per row --- */
+    .investigation-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    /* Show the 5th and 6th cards, which were hidden on desktop */
+    .investigation-grid .inv-card:nth-child(5),
+    .investigation-grid .inv-card:nth-child(6) {
+        display: block;
+    }
+    
+    /* Now, hide any cards after the 6th one on tablet */
+    .investigation-grid .inv-card:nth-child(n+7) {
+        display: none;
+    }
+
+    /* Re-order the side cards */
+    .dashboard-card--reports {
+        order: 1;
+    }
+    .dashboard-card--analytics {
+        order: 2;
+    }
+}
+
+/* For Mobile phones */
+@media (max-width: 576px) {
+    /* --- Mobile Layout: 1 card per row (stacked) --- */
+    .investigation-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* --- Show ONLY the first 2 investigation cards --- */
+    /* This rule will override the tablet and desktop rules */
+    .investigation-grid .inv-card:nth-child(n+3) {
+        display: none;
+    }
+
+    .dashboard-grid .inv-card h3 {
+        max-width: 200px;
+    }
+
+    .dashboard-grid .inv-card .inv-card-image {
+        height: 150px;
+    }
+
+    .dashboard-grid .inv-card h3{
+        font-size: 0.8rem;
+    }
+}

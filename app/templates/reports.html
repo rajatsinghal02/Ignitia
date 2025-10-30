@@ -1,0 +1,153 @@
+{% extends "base.html" %}
+{% block title %}Reports{% endblock %}
+{% block page_title %}Investigation Reports{% endblock %}
+
+{% block content %}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
+    <div class="reports-header-grid">
+        <div class="stat-card total">
+            <div class="stat-card-header">
+                <h3>Total Investigations</h3>
+                <i class="fas fa-folder-open icon"></i>
+            </div>
+            <div class="stat-card-body">
+                <span class="value" data-value="{{ total_count }}">0</span>
+            </div>
+        </div>
+        <div class="stat-card live">
+            <div class="stat-card-header">
+                <h3>Live Investigations</h3>
+                <i class="fas fa-broadcast-tower icon"></i>
+            </div>
+            <div class="stat-card-body">
+                <span class="value" data-value="{{ live_count }}">0</span>
+            </div>
+        </div>
+        <div class="stat-card ongoing">
+            <div class="stat-card-header">
+                <h3>Ongoing Investigations</h3>
+                <i class="fas fa-tasks icon"></i>
+            </div>
+            <div class="stat-card-body">
+                <span class="value" data-value="{{ ongoing_count }}">0</span>
+            </div>
+        </div>
+        <div class="stat-card completed">
+            <div class="stat-card-header">
+                <h3>Completed Investigations</h3>
+                <i class="fas fa-check-circle icon"></i>
+            </div>
+            <div class="stat-card-body">
+                <span class="value" data-value="{{ completed_count }}">0</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="reports-content-grid">
+        <div class="chart-card">
+            <div class="chart-header">
+                <h3>All Investigation Reports</h3>
+                <button class="filter-btn"><i class="fas fa-calendar-alt"></i> Last 7 Days</button>
+            </div>
+            <div class="chart-content">
+                <canvas id="allReportsChart"></canvas>
+            </div>
+        </div>
+
+        <div class="guide-card">
+            <div class="guide-header">
+                <h3>Panic Score Guide</h3>
+                <i class="fas fa-heartbeat"></i>
+            </div>
+            <div class="guide-content">
+                <p>An AI-powered metric (0-100%) gauging distress by analyzing facial cues and demographic data.</p>
+                
+                <h4><i class="fas fa-user"></i> Individual Levels</h4>
+                <ul>
+                    <li>
+                        <span class="level-indicators low"></span>
+                        <strong>Calm (0-30%):</strong> Neutral expression, no visible distress.
+                    </li>
+                    <li>
+                        <span class="level-indicators moderate"></span>
+                        <strong>Alert (31-60%):</strong> Mild surprise or unease. Observation recommended.
+                    </li>
+                    <li>
+                        <span class="level-indicators high"></span>
+                        <strong>Distressed (61-85%):</strong> Clear fear or anger. A stressful event is likely.
+                    </li>
+                    <li>
+                        <span class="level-indicators critical"></span>
+                        <strong>Critical (86-100%):</strong> Extreme distress. Potential need for immediate action.
+                    </li>
+                </ul>
+
+                <h4><i class="fas fa-users"></i> Group Levels</h4>
+                <ul>
+                    <li>
+                        <span class="level-indicators low"></span>
+                        <strong>Stable (0-35%):</strong> The group is largely calm and in control.
+                    </li>
+                    <li>
+                        <span class="level-indicators moderate"></span>
+                        <strong>Unsettled (36-65%):</strong> Growing unease or high panic in a few individuals.
+                    </li>
+                    <li>
+                        <span class="level-indicators high"></span>
+                        <strong>Volatile (66-100%):</strong> Widespread panic. The situation could be escalating.
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <div class="chart-card" style="margin-top: 24px;">
+        <div class="chart-header">
+            <h3>Investigation Category</h3>
+            <div class="filter-controls">
+                <input type="text" id="date-range-picker" placeholder="Filter by date...">
+                <button id="clear-filter-btn" class="clear-btn" style="display: none;">&times; Clear</button>
+            </div>
+        </div>
+
+        <div class="investigation-slider-container">
+            <div class="swiper" id="investigation-swiper">
+                <div class="swiper-wrapper">
+                    {% for inv in report_investigations %}
+                    <div class="swiper-slide report-inv-card" 
+                        data-investigation-id="{{ inv.id }}"
+                        data-date="{{ inv.timestamp.strftime('%Y-%m-%d') }}">
+                        <img src="{{ url_for('static', filename='profile_pics/' + inv.drone_photo) if inv.drone_photo != 'default-drone.png' else url_for('static', filename='images/default-drone.png') }}" alt="Drone Photo">
+                        <div class="report-inv-card-content">
+                            <h4>{{ inv.title }}</h4>
+                            <div class="card-footer">
+                                <span><i class="fas fa-star"></i> 4.8 Star</span>
+                                <span><i class="far fa-clock"></i>
+                                    {% set days = (datetime.utcnow() - inv.timestamp).days + 1 %}
+                                    {{ days }} Day{% if days > 1 %}s{% endif %}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    {% else %}
+                    <p>No investigations to display.</p>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script>
+        // Pass data ONLY for the first chart
+        const chart1Labels = {{ chart1_labels | safe }};
+        const chart1TotalData = {{ chart1_total_data | safe }};
+        const chart1CompletedData = {{ chart1_completed_data | safe }};
+    </script>
+    <script src="{{ url_for('static', filename='js/reports.js') }}"></script>
+{% endblock %}

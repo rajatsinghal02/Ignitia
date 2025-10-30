@@ -6,12 +6,12 @@ document.addEventListener('DOMContentLoaded', function () {
         const investigationId = livePageContainer.dataset.investigationId;
 
         // Camera and Time Logic
-        const video = document.getElementById('camera-feed');
-        if (video && navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-            navigator.mediaDevices.getUserMedia({ video: true })
-                .then(stream => { video.srcObject = stream; })
-                .catch(err => { console.error("Error accessing camera: ", err); });
-        }
+        // const video = document.getElementById('camera-feed');
+        // if (video && navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+        //     navigator.mediaDevices.getUserMedia({ video: true })
+        //         .then(stream => { video.srcObject = stream; })
+        //         .catch(err => { console.error("Error accessing camera: ", err); });
+        // }
         
         const timeElement = document.getElementById('live-time');
         if (timeElement) {

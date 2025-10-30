@@ -25,7 +25,7 @@ import edge_tts
 import pytz
 IST = pytz.timezone("Asia/Kolkata")
 
-main = Blueprint('main', _name_)
+main = Blueprint('main', __name__)
 
 # --- Context Processor ---
 @main.app_context_processor

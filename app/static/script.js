@@ -1,3 +1,5 @@
+
+
 // static/script.js
 
 // --- Make this a GLOBAL function by defining it here ---
@@ -233,15 +235,15 @@ document.addEventListener('DOMContentLoaded', function () {
                 if (status === 'Live' || status === 'Pending') {
                     showConfirmationModal({
                         title: status === 'Live' ? 'Start Investigation' : 'Continue Investigation',
-                        message: Open live screen for <strong>${title}</strong>?,
+                        message: `Open live screen for <strong>${title}</strong>?`,
                         confirmText: status === 'Live' ? 'Yes, Start' : 'Yes, Continue',
                         newStatus: 'Live',
                         goLive: true,
-                        formAction: /investigation/${id}/update_status
+                        formAction: `/investigation/${id}/update_status`
                     });
                 } else if (status === 'Completed') {
-                    const investigationsPageUrl = /investigations#${timestamp};
-                    const message = This investigation is complete. You can <a href="${investigationsPageUrl}">view or delete it</a>.;
+                    const investigationsPageUrl = `/investigations#${timestamp}`;
+                    const message = `This investigation is complete. You can <a href="${investigationsPageUrl}">view or delete it</a>.`;
                     showCustomFlash(message);
                 }
             // --- Logic for Investigations Page Cards (only if an action button was clicked) ---
@@ -252,21 +254,21 @@ document.addEventListener('DOMContentLoaded', function () {
                     editForm.querySelector('[name="title"]').value = card.dataset.title;
                     editForm.querySelector('[name="location"]').value = card.dataset.location;
                     editForm.querySelector('[name="description"]').value = card.dataset.description;
-                    editForm.action = /investigation/${id}/edit;
+                    editForm.action = `/investigation/${id}/edit`;
                     if (editModalOverlay) editModalOverlay.classList.add('active');
                 } else if (action === 'delete') {
                     showConfirmationModal({
-                        title: 'Confirm Deletion', message: Delete <strong>${title}</strong>?,
+                        title: 'Confirm Deletion', message: `Delete <strong>${title}</strong>?`,
                         confirmText: 'Yes, Delete', buttonColor: 'red',
-                        formAction: /investigation/${id}/delete
+                        formAction: `/investigation/${id}/delete`
                     });
                 } else if (action === 'start' || action === 'continue') {
                     showConfirmationModal({
                         title: action === 'start' ? 'Start Investigation' : 'Continue Investigation',
-                        message: Open live screen for <strong>${title}</strong>?,
+                        message: `Open live screen for <strong>${title}</strong>?`,
                         confirmText: action === 'start' ? 'Yes, Start' : 'Yes, Continue',
                         newStatus: 'Live', goLive: true,
-                        formAction: /investigation/${id}/update_status
+                        formAction: `/investigation/${id}/update_status`
                     });
                 }
             }

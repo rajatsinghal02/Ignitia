@@ -194,18 +194,18 @@ document.addEventListener('DOMContentLoaded', function () {
         // ===== START: MODIFIED SECTION =====
         const modalSubtitle = capturesModal.querySelector('#captures-modal-subtitle'); // 1. Get the subtitle element
         
-        modalTitle.textContent = Captures for: ${investigationTitle};
+        modalTitle.textContent = `Captures for: ${investigationTitle}`;
         modalSubtitle.textContent = 'Loading captures...'; // 2. Set a loading state
         // ===== END: MODIFIED SECTION =====
         modalGrid.innerHTML = '<p class="placeholder-text">Loading...</p>';
         openModal(capturesModal);
         
-        fetch(/investigation/${investigationId}/captures)
+        fetch(`/investigation/${investigationId}/captures`)
             .then(response => response.json())
             .then(captures => {
                 // ===== START: MODIFIED SECTION =====
                 const captureCount = captures.length; // 3. Get the count
-                modalSubtitle.textContent = Viewing ${captureCount} captured images for this investigation.; // 4. Update the text
+                modalSubtitle.textContent = `Viewing ${captureCount} captured images for this investigation.`; // 4. Update the text
                 // ===== END: MODIFIED SECTION =====
                 
                 modalGrid.innerHTML = '';
@@ -214,7 +214,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         const imgWrapper = document.createElement('div');
                         imgWrapper.className = 'capture-image-wrapper';
                         imgWrapper.dataset.captureId = capture.id; // IMPORTANT
-                        imgWrapper.innerHTML = <img src="${capture.url}" alt="Capture">;
+                        imgWrapper.innerHTML = `<img src="${capture.url}" alt="Capture">`;
                         modalGrid.appendChild(imgWrapper);
                     });
                 } else {
@@ -238,7 +238,7 @@ document.addEventListener('DOMContentLoaded', function () {
         grid.innerHTML = '<p class="placeholder-text">Analyzing image... Please wait.</p>';
         openModal(groupAnalysisModal);
 
-        fetch(/capture/${captureId}/analyze, { method: 'POST' })
+        fetch(`/capture/${captureId}/analyze`, { method: 'POST' })
             .then(response => response.json())
             .then(data => {
                 if (data.error) throw new Error(data.error);
@@ -246,7 +246,7 @@ document.addEventListener('DOMContentLoaded', function () {
             })
             .catch(error => {
                 console.error('Analysis failed:', error);
-                grid.innerHTML = <p class="placeholder-text error">Analysis failed: ${error.message}</p>;
+                grid.innerHTML = `<p class="placeholder-text error">Analysis failed: ${error.message}</p>`;
             });
     });
 
@@ -257,7 +257,7 @@ document.addEventListener('DOMContentLoaded', function () {
         document.getElementById('group-total-faces').textContent = group_stats.total_faces || 0;
         document.getElementById('group-male-count').textContent = group_stats.male_count || 0;
         document.getElementById('group-female-count').textContent = group_stats.female_count || 0;
-        document.getElementById('group-panic-score').textContent = ${group_stats.panic_score || 0}%;
+        document.getElementById('group-panic-score').textContent = `${group_stats.panic_score || 0}%`;
 
         // Populate grid
         const grid = document.getElementById('group-faces-grid');
@@ -301,7 +301,7 @@ document.addEventListener('DOMContentLoaded', function () {
         document.getElementById('person-detail-emotion').textContent = personData.emotion_label;
         document.getElementById('person-detail-vulnerability').textContent = personData.vulnerability;
         document.getElementById('person-detail-fear').textContent = personData.fear_score;
-        document.getElementById('person-detail-panic').innerHTML = ${personData.panic_score}%;
+        document.getElementById('person-detail-panic').innerHTML = `${personData.panic_score}%`;
 
         openModal(personDetailsModal);
     }

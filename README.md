@@ -49,7 +49,7 @@ Ignitia is a sophisticated Flask-based web application designed for managing and
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/770navyasharma/IgnitiaTech.git
+git clone https://github.com/rajatsinghal02/Ignitia.git
 cd Ignitia
 ```
 
